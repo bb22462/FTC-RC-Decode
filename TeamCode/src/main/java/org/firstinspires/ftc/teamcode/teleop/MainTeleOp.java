@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.teleop;
+    package org.firstinspires.ftc.teamcode.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -26,7 +26,7 @@ public class MainTeleOp extends LinearOpMode {
         motor_right_back = hardwareMap.get(DcMotorEx.class, "motor_r_r");
         motor_left_back = hardwareMap.get(DcMotorEx.class, "motor_l_r");
         motor_right_front = hardwareMap.get(DcMotorEx.class, "motor_r_f");
-        motor_z = hardwareMap.get(DcMotorEx.class, "z");
+        motor_z = hardwareMap.get(DcMotorEx.class, "motor_z");
         motor_v = hardwareMap.get(DcMotorEx.class, "motor_v");
         motor_v2 = hardwareMap.get(DcMotorEx.class, "motor_v2");
 
