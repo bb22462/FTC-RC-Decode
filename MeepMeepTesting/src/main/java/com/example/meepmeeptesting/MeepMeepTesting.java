@@ -34,10 +34,10 @@ public class MeepMeepTesting {
                 .waitSeconds(5)
 //
 //                // Третий Забор
-//                .splineTo(new Vector2d(36, 29), Math.toRadians(90))
-//                .lineToY(45)
-//                .splineTo(new Vector2d(-30, 31), Math.toRadians(135))
-//                .waitSeconds(5)
+                .splineTo(new Vector2d(36, 29), Math.toRadians(90))
+                .lineToY(45)
+                .splineTo(new Vector2d(-30, 31), Math.toRadians(135))
+                .waitSeconds(5)
 //
 //                // На линию
                 // .splineTo(new Vector2d(0, 47), Math.toRadians(270))

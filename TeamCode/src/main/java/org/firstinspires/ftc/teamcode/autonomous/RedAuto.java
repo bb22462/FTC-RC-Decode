@@ -26,7 +26,8 @@ public class RedAuto extends LinearOpMode {
         MecanumDrive drive = new MecanumDrive(hardwareMap, startPose);
         Zahvat zahvat = new Zahvat(hardwareMap);
         Shuter shuter = new Shuter(hardwareMap);
-        TrajectoryActionBuilder trajectory1 = drive.actionBuilder(startPose)
+        zahvat.setPowerZ2(0.8);
+        TrajectoryActionBuilder throwPreloaded = drive.actionBuilder(startPose)
                 .afterTime(0, () -> {
                     zahvat.setPower(0);
                 })
@@ -34,47 +35,58 @@ public class RedAuto extends LinearOpMode {
                     shuter.setPower(0.85);
                 })
                 .afterTime(2, () -> {
-                    zahvat.setPower(-0.6);
+                    zahvat.setPower(0.6);
                 })
-                .afterTime(3.8, () -> {
+                .splineToLinearHeading(new Pose2d(-30, 31, Math.toRadians(135)), Math.toRadians(135))
+                .waitSeconds(2);
+
+        TrajectoryActionBuilder takeAndThrowFirst = throwPreloaded.endTrajectory()
+                .afterTime(0, () -> {
                     zahvat.setPower(0);
                     shuter.setPower(0);
                 })
-                .splineToLinearHeading(new Pose2d(-30, 31, Math.toRadians(135)), Math.toRadians(135))
-                .waitSeconds(1.5);
-        TrajectoryActionBuilder trajectory2 = trajectory1.endTrajectory()
                 .splineTo(new Vector2d(-11, 29), Math.toRadians(90))
                 .lineToY(45)
-                .afterTime(0, () -> {
-                    zahvat.setPower(-1);
-                })
-                .splineToLinearHeading(new Pose2d(-30, 31, Math.toRadians(135)), Math.toRadians(135))
                 .afterTime(0.3, () -> {
                     shuter.setPower(0.85);
                 })
                 .afterTime(2, () -> {
-                    zahvat.setPower(-0.6);
+                    zahvat.setPower(0.6);
                 })
-                .afterTime(3.8, () -> {
+                .splineToLinearHeading(new Pose2d(-30, 31, Math.toRadians(135)), Math.toRadians(135))
+                .waitSeconds(2);
+
+        TrajectoryActionBuilder takeAndThrowSecond = takeAndThrowFirst.endTrajectory()
+                .afterTime(0, () -> {
                     zahvat.setPower(0);
                     shuter.setPower(0);
                 })
-                .waitSeconds(1.5);
-        TrajectoryActionBuilder trajectory3 = trajectory2.endTrajectory()
                 .splineTo(new Vector2d(12, 29), Math.toRadians(90))
                 .lineToY(45)
-                .splineToLinearHeading(new Pose2d(-30, 31, Math.toRadians(135)), Math.toRadians(135))
                 .afterTime(0.3, () -> {
                     shuter.setPower(0.85);
                 })
                 .afterTime(2, () -> {
-                    zahvat.setPower(-0.6);
+                    zahvat.setPower(0.6);
                 })
-                .afterTime(3.8, () -> {
+                .splineToLinearHeading(new Pose2d(-30, 31, Math.toRadians(135)), Math.toRadians(135))
+                .waitSeconds(2);
+
+        TrajectoryActionBuilder takeAndThrowThird = takeAndThrowSecond.endTrajectory()
+                .afterTime(0, () -> {
                     zahvat.setPower(0);
                     shuter.setPower(0);
                 })
-                .waitSeconds(1.5);
+                .splineTo(new Vector2d(36, 29), Math.toRadians(90))
+                .lineToY(45)
+                .afterTime(0.3, () -> {
+                    shuter.setPower(0.85);
+                })
+                .afterTime(2, () -> {
+                    zahvat.setPower(0.6);
+                })
+                .splineTo(new Vector2d(-30, 31), Math.toRadians(135))
+                .waitSeconds(2);
 
         waitForStart();
 
@@ -82,9 +94,10 @@ public class RedAuto extends LinearOpMode {
 
         Actions.runBlocking(
                 new SequentialAction(
-                        trajectory1.build(),
-                        trajectory2.build(),
-                        trajectory3.build()
+                        throwPreloaded.build(),
+                        takeAndThrowFirst.build(),
+                        takeAndThrowSecond.build(),
+                        takeAndThrowThird.build()
                 )
         );
 
