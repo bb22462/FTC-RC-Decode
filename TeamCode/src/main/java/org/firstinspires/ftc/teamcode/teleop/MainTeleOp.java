@@ -13,7 +13,7 @@ import com.qualcomm.robotcore.hardware.TouchSensor;
 @TeleOp
 public class MainTeleOp extends LinearOpMode {
 
-    DcMotorEx motor_left_front, motor_left_back, motor_right_back, motor_right_front, motor_v, motor_z, motor_v2;
+    DcMotorEx leftFront, leftBack, rightBack, rightFront, motor_v, motor_z, motor_v2;
     Servo Zahvat, RotateZahvat;
     TouchSensor touch;
 
@@ -22,22 +22,31 @@ public class MainTeleOp extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
-        motor_left_front = hardwareMap.get(DcMotorEx.class, "motor_l_f");
-        motor_right_back = hardwareMap.get(DcMotorEx.class, "motor_r_r");
-        motor_left_back = hardwareMap.get(DcMotorEx.class, "motor_l_r");
-        motor_right_front = hardwareMap.get(DcMotorEx.class, "motor_r_f");
+        leftFront = hardwareMap.get(DcMotorEx.class, "motor_l_f");
+        leftBack = hardwareMap.get(DcMotorEx.class, "motor_l_r");
+        rightBack = hardwareMap.get(DcMotorEx.class, "motor_r_r");
+        rightFront = hardwareMap.get(DcMotorEx.class, "motor_r_f");
+
         motor_z = hardwareMap.get(DcMotorEx.class, "motor_z");
         motor_v = hardwareMap.get(DcMotorEx.class, "motor_v");
         motor_v2 = hardwareMap.get(DcMotorEx.class, "motor_v2");
 
 
-        motor_left_front.setDirection(DcMotorSimple.Direction.FORWARD);
-        motor_right_back.setDirection(DcMotorSimple.Direction.REVERSE);
-        motor_left_back.setDirection(DcMotorSimple.Direction.FORWARD);
-        motor_right_front.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftBack.setDirection(DcMotorSimple.Direction.FORWARD);
+        leftFront.setDirection(DcMotorSimple.Direction.FORWARD);
+
+        leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         motor_z.setDirection(DcMotorSimple.Direction.FORWARD);
+
         motor_v.setDirection(DcMotorSimple.Direction.REVERSE);
         motor_v2.setDirection(DcMotorSimple.Direction.FORWARD);
+
         motor_v.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motor_v2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         waitForStart();
@@ -59,16 +68,17 @@ public class MainTeleOp extends LinearOpMode {
                 motor_v.setPower(-0.84);
                 motor_v2.setPower(-0.84);
             }
+
             if (gamepad1.left_bumper){
-                motor_left_front.setPower((gamepad1.left_stick_y - gamepad1.left_stick_x - gamepad1.right_stick_x) * 0.25);
-                motor_right_back.setPower((gamepad1.left_stick_y - gamepad1.left_stick_x + gamepad1.right_stick_x) * 0.25);
-                motor_left_back.setPower((gamepad1.left_stick_y + gamepad1.left_stick_x - gamepad1.right_stick_x) * 0.25);
-                motor_right_front.setPower((gamepad1.left_stick_y + gamepad1.left_stick_x + gamepad1.right_stick_x) * 0.25);
+                leftFront.setPower((-gamepad1.left_stick_y + gamepad1.left_stick_x + gamepad1.right_stick_x) * 0.25);
+                rightBack.setPower((-gamepad1.left_stick_y + gamepad1.left_stick_x - gamepad1.right_stick_x) * 0.25);
+                leftBack.setPower((-gamepad1.left_stick_y - gamepad1.left_stick_x + gamepad1.right_stick_x) * 0.25);
+                rightFront.setPower((-gamepad1.left_stick_y - gamepad1.left_stick_x - gamepad1.right_stick_x) * 0.25);
             } else {
-                motor_left_front.setPower((gamepad1.left_stick_y - gamepad1.left_stick_x - gamepad1.right_stick_x) * 1);
-                motor_right_back.setPower((gamepad1.left_stick_y - gamepad1.left_stick_x + gamepad1.right_stick_x) * 1);
-                motor_left_back.setPower((gamepad1.left_stick_y + gamepad1.left_stick_x - gamepad1.right_stick_x) * 1);
-                motor_right_front.setPower((gamepad1.left_stick_y + gamepad1.left_stick_x + gamepad1.right_stick_x) * 1);
+                leftFront.setPower((-gamepad1.left_stick_y + gamepad1.left_stick_x + gamepad1.right_stick_x) * 1);
+                rightBack.setPower((-gamepad1.left_stick_y + gamepad1.left_stick_x - gamepad1.right_stick_x) * 1);
+                leftBack.setPower((-gamepad1.left_stick_y - gamepad1.left_stick_x + gamepad1.right_stick_x) * 1);
+                rightFront.setPower((-gamepad1.left_stick_y - gamepad1.left_stick_x - gamepad1.right_stick_x) * 1);
             }
             if (gamepad1.right_bumper) {
                 motor_z.setPower(-0.85);

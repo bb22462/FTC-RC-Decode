@@ -42,7 +42,6 @@ public class RedAuto extends LinearOpMode {
                 })
                 .splineToLinearHeading(new Pose2d(-30, 31, Math.toRadians(135)), Math.toRadians(135))
                 .waitSeconds(1.5);
-
         TrajectoryActionBuilder trajectory2 = trajectory1.endTrajectory()
                 .splineTo(new Vector2d(-11, 29), Math.toRadians(90))
                 .lineToY(45)
