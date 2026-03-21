@@ -42,11 +42,6 @@ public class TestAuto extends LinearOpMode {
                         trajectory1.build()
                 )
         );
-        Actions.runBlocking(
-                new SequentialAction(
-                        trajectory1.build()
-                )
-        );
 
         while (!isStopRequested() && opModeIsActive()) ;
     }
