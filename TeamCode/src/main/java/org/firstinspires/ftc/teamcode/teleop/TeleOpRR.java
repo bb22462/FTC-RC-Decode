@@ -25,6 +25,8 @@ public class TeleOpRR extends LinearOpMode {
 
     DcMotorEx motor_v, motor_z, motor_v2, motor_z2;
 
+    boolean shetkiEnabled = true;
+
     @Override
     public void runOpMode() throws InterruptedException {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
@@ -32,11 +34,12 @@ public class TeleOpRR extends LinearOpMode {
         MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
 
         motor_z = hardwareMap.get(DcMotorEx.class, "motor_z");
-        motor_z2 = hardwareMap.get(DcMotorEx.class, "motor_z");
+        motor_z2 = hardwareMap.get(DcMotorEx.class, "motor_z2");
         motor_v = hardwareMap.get(DcMotorEx.class, "motor_v");
         motor_v2 = hardwareMap.get(DcMotorEx.class, "motor_v2");
 
         motor_z.setDirection(DcMotorSimple.Direction.FORWARD);
+        motor_z2.setDirection(DcMotorSimple.Direction.REVERSE);
 
         motor_v.setDirection(DcMotorSimple.Direction.REVERSE);
         motor_v2.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -48,7 +51,15 @@ public class TeleOpRR extends LinearOpMode {
 
         while (opModeIsActive()) {
             Pose2d pose = drive.localizer.getPose();
-            motor_z2.setPower(0.8);
+            if(gamepad1.back) {
+                shetkiEnabled = !shetkiEnabled;
+            }
+            if(shetkiEnabled) {
+                motor_z2.setPower(0.8);
+            }
+            else {
+                motor_z2.setPower(0);
+            }
 
             if (gamepad1.dpad_down) {
                 motor_v.setPower(0);

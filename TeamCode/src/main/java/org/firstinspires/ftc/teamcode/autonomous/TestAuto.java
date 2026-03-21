@@ -22,16 +22,26 @@ public class TestAuto extends LinearOpMode {
         Zahvat zahvat = new Zahvat(hardwareMap);
         Shuter shuter = new Shuter(hardwareMap);
         TrajectoryActionBuilder trajectory1 = drive.actionBuilder(startPose)
-                .splineTo(new Vector2d(24, 24), Math.toRadians(90))
-                .stopAndAdd(zahvat.setPower(1))
-                .waitSeconds(3)
-                .stopAndAdd(zahvat.setPower(0));
+                .lineToX(24)
+                .turn(Math.toRadians(90))
+                .lineToY(24)
+                .turn(Math.toRadians(90))
+                .lineToX(0)
+                .turn(Math.toRadians(90))
+                .lineToY(0)
+                .turn(Math.toRadians(90));
+
 
 
         waitForStart();
 
         if (isStopRequested()) return;
 
+        Actions.runBlocking(
+                new SequentialAction(
+                        trajectory1.build()
+                )
+        );
         Actions.runBlocking(
                 new SequentialAction(
                         trajectory1.build()
