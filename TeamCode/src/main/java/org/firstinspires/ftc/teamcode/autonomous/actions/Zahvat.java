@@ -14,7 +14,8 @@ public class Zahvat {
     public Zahvat(HardwareMap hardwareMap) {
         zahvat = hardwareMap.get(DcMotorEx.class, "motor_z");
         zahvat2 = hardwareMap.get(DcMotorEx.class, "motor_z2");
-        zahvat.setDirection(DcMotorSimple.Direction.FORWARD);
+        zahvat.setDirection(DcMotorSimple.Direction.REVERSE);
+        zahvat2.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
     public class SetPower implements Action {

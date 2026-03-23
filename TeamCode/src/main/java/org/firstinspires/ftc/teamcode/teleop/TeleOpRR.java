@@ -74,8 +74,8 @@ public class TeleOpRR extends LinearOpMode {
                 motor_v2.setPower(-1);
             }
             if (gamepad1.dpad_up) {
-                motor_v.setPower(-0.84);
-                motor_v2.setPower(-0.84);
+                motor_v.setPower(-0.86);
+                motor_v2.setPower(-0.86);
             }
 
             drive.setDrivePowers(new PoseVelocity2d(

@@ -16,17 +16,24 @@ public class MeepMeepTesting {
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
                 .build();
 
-//        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-47, 46, Math.toRadians(90)))
-//                // Первый заброс
-//                .splineToLinearHeading(new Pose2d(-30, 31, Math.toRadians(135)), Math.toRadians(135))
-//                .waitSeconds(1.5)
-//
+        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-47, -46, Math.toRadians(270)))
+                // Первый заброс
+                .splineToLinearHeading(new Pose2d(-30, -31, Math.toRadians(225)), Math.toRadians(225))
+                .waitSeconds(1.5)
+
+                .strafeToLinearHeading(new Vector2d(-8, -21), Math.toRadians(270))
+                .strafeTo(new Vector2d(-8, -53))
+                .splineToLinearHeading(new Pose2d(-28, -28, Math.toRadians(225)), Math.toRadians(225))
+                .waitSeconds(2)
+
 //                // Первый забор
-//                .splineTo(new Vector2d(-11, 29), Math.toRadians(90))
-//                .lineToY(45)
+//                // .splineTo(new Vector2d(-11, 29), Math.toRadians(90))
+//                        .strafeToLinearHeading(new Vector2d(-11, 29), Math.toRadians(90))
+//         //.splineToLinearHeading(new Pose2d(-11, 29, Math.toRadians(90)), Math.toRadians(90))
+//                                .strafeTo(new Vector2d(-11, 45))
 //                .splineToLinearHeading(new Pose2d(-30, 31, Math.toRadians(135)), Math.toRadians(135))
 //                .waitSeconds(1.5)
-//
+
 //                // Второй Забор
 //                .splineTo(new Vector2d(12, 29), Math.toRadians(90))
 //                .lineToY(45)
@@ -38,21 +45,31 @@ public class MeepMeepTesting {
 //                .lineToY(45)
 //                .splineTo(new Vector2d(-30, 31), Math.toRadians(135))
 //                .waitSeconds(5)
-////
-////                // На линию
-//                // .splineTo(new Vector2d(0, 47), Math.toRadians(270))
+//
+//                // На линию
+                // .splineTo(new Vector2d(0, 47), Math.toRadians(270))
+                .build());
+
+//        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(0, 0, Math.toRadians(0)))
+//                .lineToX(24)
+//                .turn(Math.toRadians(90))
+//                .lineToY(24)
+//                .turn(Math.toRadians(90))
+//                .lineToX(0)
+//                .turn(Math.toRadians(90))
+//                .lineToY(0)
+//                .turn(Math.toRadians(90))
 //                .build());
 
-        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(0, 0, Math.toRadians(0)))
-                .lineToX(24)
-                .turn(Math.toRadians(90))
-                .lineToY(24)
-                .turn(Math.toRadians(90))
-                .lineToX(0)
-                .turn(Math.toRadians(90))
-                .lineToY(0)
-                .turn(Math.toRadians(90))
-                .build());
+//        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-47, 46, Math.toRadians(90)))
+//                // Первый заброс
+//                .splineToLinearHeading(new Pose2d(-30, 31, Math.toRadians(135)), Math.toRadians(135))
+//                .waitSeconds(1.5)
+//
+//                .splineToLinearHeading(new Pose2d(13, 57, Math.toRadians(135)), Math.toRadians(135))
+//                .waitSeconds(1.5)
+//
+//                .build());
 
         meepMeep.setBackground(MeepMeep.Background.FIELD_DECODE_JUICE_DARK)
                 .setDarkMode(true)
