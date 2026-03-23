@@ -54,7 +54,7 @@ public class RedAuto extends LinearOpMode {
                 .afterTime(1.3, shuter.setPower(powerCorrect(0.87)))
                 .afterTime(2, zahvat.setPower(powerCorrect(1)))
                 .splineToLinearHeading(new Pose2d(-28, 28, Math.toRadians(135)), Math.toRadians(135))
-                .waitSeconds(2)
+                .waitSeconds(1)
 
                 // Третий заброс
                 .afterTime(0, zahvat.setPower(0))
@@ -69,7 +69,7 @@ public class RedAuto extends LinearOpMode {
                 .afterTime(2.95, zahvat.setPower(powerCorrect(1)))
                 .strafeTo(new Vector2d(17, 40))
                 .splineToLinearHeading(new Pose2d(-30, 31, Math.toRadians(135)), Math.toRadians(135))
-                .waitSeconds(2)
+                .waitSeconds(1)
 
                 // Четвертый заброс
                 .afterTime(0, zahvat.setPower(0))
@@ -77,8 +77,8 @@ public class RedAuto extends LinearOpMode {
                 .strafeToLinearHeading(new Vector2d(39, 21), Math.toRadians(90))
                 .afterTime(0, zahvat.setPower(powerCorrect(0.8)))
                 .afterTime(0.0, shuter.setPower(powerCorrect(-0.87)))
-                .afterTime(1.2, zahvat.setPower(powerCorrect(-1)))
-                .afterTime(1.3, zahvat.setPower(0))
+                .afterTime(1.4, zahvat.setPower(powerCorrect(-1)))
+                .afterTime(1.5, zahvat.setPower(0))
                 .strafeTo(new Vector2d(39, 58))
                 .afterTime(3, shuter.setPower(powerCorrect(0.87)))
                 .afterTime(3.95, zahvat.setPower(powerCorrect(1)))

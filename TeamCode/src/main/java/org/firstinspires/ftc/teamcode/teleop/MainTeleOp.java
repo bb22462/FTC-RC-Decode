@@ -13,7 +13,7 @@ import com.qualcomm.robotcore.hardware.TouchSensor;
 @TeleOp
 public class MainTeleOp extends LinearOpMode {
 
-    DcMotorEx leftFront, leftBack, rightBack, rightFront, motor_v, motor_z, motor_v2;
+    DcMotorEx leftFront, leftBack, rightBack, rightFront, motor_v, motor_z, motor_v2, motor_z2;
     Servo Zahvat, RotateZahvat;
     TouchSensor touch;
 
@@ -28,6 +28,7 @@ public class MainTeleOp extends LinearOpMode {
         rightFront = hardwareMap.get(DcMotorEx.class, "motor_r_f");
 
         motor_z = hardwareMap.get(DcMotorEx.class, "motor_z");
+        motor_z2 = hardwareMap.get(DcMotorEx.class, "motor_z2");
         motor_v = hardwareMap.get(DcMotorEx.class, "motor_v");
         motor_v2 = hardwareMap.get(DcMotorEx.class, "motor_v2");
 
@@ -43,14 +44,17 @@ public class MainTeleOp extends LinearOpMode {
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         motor_z.setDirection(DcMotorSimple.Direction.FORWARD);
+        motor_z2.setDirection(DcMotorSimple.Direction.REVERSE);
 
         motor_v.setDirection(DcMotorSimple.Direction.REVERSE);
         motor_v2.setDirection(DcMotorSimple.Direction.FORWARD);
 
         motor_v.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motor_v2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        waitForStart();
 
+
+        waitForStart();
+        motor_z2.setPower(0.8);
         while (opModeIsActive()) {
             if (gamepad1.dpad_down) {
                 motor_v.setPower(0);
@@ -69,7 +73,7 @@ public class MainTeleOp extends LinearOpMode {
                 motor_v2.setPower(-0.84);
             }
 
-            if (gamepad1.left_bumper){
+            if (gamepad1.left_stick_button){
                 leftFront.setPower((-gamepad1.left_stick_y + gamepad1.left_stick_x + gamepad1.right_stick_x) * 0.25);
                 rightBack.setPower((-gamepad1.left_stick_y + gamepad1.left_stick_x - gamepad1.right_stick_x) * 0.25);
                 leftBack.setPower((-gamepad1.left_stick_y - gamepad1.left_stick_x + gamepad1.right_stick_x) * 0.25);
@@ -80,11 +84,17 @@ public class MainTeleOp extends LinearOpMode {
                 leftBack.setPower((-gamepad1.left_stick_y - gamepad1.left_stick_x + gamepad1.right_stick_x) * 1);
                 rightFront.setPower((-gamepad1.left_stick_y - gamepad1.left_stick_x - gamepad1.right_stick_x) * 1);
             }
-            if (gamepad1.right_bumper) {
-                motor_z.setPower(-0.85);
-            } else {
-                motor_z.setPower(-gamepad1.right_trigger + gamepad1.left_trigger*0.8);
+
+            if(gamepad1.left_bumper) {
+                rightFront.setPower(1);
+                leftBack.setPower(1);
             }
+            else if(gamepad1.right_bumper) {
+                leftFront.setPower(1);
+                rightBack.setPower(1);
+            }
+
+            motor_z.setPower(-gamepad1.right_trigger + gamepad1.left_trigger*0.8);
 
         }
 
