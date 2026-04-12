@@ -1,5 +1,6 @@
     package org.firstinspires.ftc.teamcode.teleop;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -10,12 +11,23 @@ import com.qualcomm.robotcore.hardware.TouchSensor;
 
 
 
-@TeleOp
+@TeleOp(name = "Управляемый основной" )
+@Config
 public class MainTeleOp extends LinearOpMode {
 
     DcMotorEx leftFront, leftBack, rightBack, rightFront, motor_v, motor_z, motor_v2, motor_z2;
     Servo Zahvat, RotateZahvat;
     TouchSensor touch;
+    boolean shetkiEnabled = true;
+
+    double voltage;
+    public static double voltageSt = 12.8;
+
+
+
+    double powerCorrect(double p) {
+        return (voltageSt / voltage) * p;
+    }
 
 
     //OpenCvCamera camera;
@@ -54,23 +66,32 @@ public class MainTeleOp extends LinearOpMode {
 
 
         waitForStart();
-        motor_z2.setPower(0.8);
         while (opModeIsActive()) {
+            voltage = hardwareMap.voltageSensor.iterator().next().getVoltage();
+            if(gamepad1.back) {
+                shetkiEnabled = !shetkiEnabled;
+            }
+            if(shetkiEnabled) {
+                motor_z2.setPower(0.8);
+            }
+            else {
+                motor_z2.setPower(0);
+            }
             if (gamepad1.dpad_down) {
                 motor_v.setPower(0);
                 motor_v2.setPower(0);
             }
             if (gamepad1.dpad_right) {
-                motor_v.setPower(0.6);
-                motor_v2.setPower(0.6);
+                motor_v.setPower(powerCorrect(0.6));
+                motor_v2.setPower(powerCorrect(0.6));
             }
             if (gamepad1.dpad_left) {
                 motor_v.setPower(-1);
                 motor_v2.setPower(-1);
             }
             if (gamepad1.dpad_up) {
-                motor_v.setPower(-0.84);
-                motor_v2.setPower(-0.84);
+                motor_v.setPower(powerCorrect(-0.75));
+                motor_v2.setPower(powerCorrect(-0.75));
             }
 
             if (gamepad1.left_stick_button){
@@ -93,6 +114,7 @@ public class MainTeleOp extends LinearOpMode {
                 leftFront.setPower(1);
                 rightBack.setPower(1);
             }
+
 
             motor_z.setPower(-gamepad1.right_trigger + gamepad1.left_trigger*0.8);
 

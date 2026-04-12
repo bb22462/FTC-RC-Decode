@@ -2,23 +2,18 @@ package org.firstinspires.ftc.teamcode.autonomous;
 
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.SequentialAction;
-import com.acmerobotics.roadrunner.Trajectory;
 import com.acmerobotics.roadrunner.TrajectoryActionBuilder;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.autonomous.actions.Shuter;
 import org.firstinspires.ftc.teamcode.autonomous.actions.Zahvat;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
-@Autonomous(name = "Красный автоном на 12")
-public class RedAuto extends LinearOpMode {
+@Autonomous(name = "Красный автоном на 9")
+public class RedAuto9 extends LinearOpMode {
 
     double voltage;
 
@@ -72,19 +67,7 @@ public class RedAuto extends LinearOpMode {
                 .waitSeconds(0.8)
 
                 // Четвертый заброс
-                .afterTime(0, zahvat.setPower(0))
-                .afterTime(0, shuter.setPower(0))
-                .strafeToLinearHeading(new Vector2d(39, 18), Math.toRadians(90))
-                .afterTime(0, zahvat.setPower(powerCorrect(0.8)))
-                .afterTime(0.0, shuter.setPower(powerCorrect(-0.86)))
-                .afterTime(1.6, zahvat.setPower(powerCorrect(-1)))
-                .afterTime(1.7, zahvat.setPower(0))
-                .strafeTo(new Vector2d(39, 58))
-                .afterTime(3.5, shuter.setPower(powerCorrect(0.86)))
-                .afterTime(4.2, zahvat.setPower(powerCorrect(1)))
-                .strafeTo(new Vector2d(39, 40))
-                .splineToLinearHeading(new Pose2d(-30, 31, Math.toRadians(135)), Math.toRadians(135))
-                .waitSeconds(2);
+                .strafeToLinearHeading(new Vector2d(-13, 50), Math.toRadians(90));
 
 
 

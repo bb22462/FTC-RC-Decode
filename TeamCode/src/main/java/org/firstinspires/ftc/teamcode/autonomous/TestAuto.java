@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.autonomous.actions.Shuter;
 import org.firstinspires.ftc.teamcode.autonomous.actions.Zahvat;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
-@Autonomous
+@Autonomous(name = "Квадрат (НЕ ЗАПУСКАТЬ)")
 public class TestAuto extends LinearOpMode {
 
     @Override

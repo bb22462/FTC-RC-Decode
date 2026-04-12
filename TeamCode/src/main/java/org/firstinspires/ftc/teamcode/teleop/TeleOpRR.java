@@ -20,7 +20,7 @@ import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 import org.firstinspires.ftc.teamcode.roadrunner.TankDrive;
 import org.firstinspires.ftc.teamcode.roadrunner.tuning.TuningOpModes;
 
-@TeleOp
+@TeleOp(name = "Управляемый RR (НЕ ЗАПУСКАТЬ)")
 public class TeleOpRR extends LinearOpMode {
 
     DcMotorEx motor_v, motor_z, motor_v2, motor_z2;
