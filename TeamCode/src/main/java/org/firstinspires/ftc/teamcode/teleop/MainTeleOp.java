@@ -77,6 +77,7 @@ public class MainTeleOp extends LinearOpMode {
             else {
                 motor_z2.setPower(0);
             }
+
             if (gamepad1.dpad_down) {
                 motor_v.setPower(0);
                 motor_v2.setPower(0);
